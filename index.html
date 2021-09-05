@@ -50,28 +50,27 @@
     </div>
 
     <script>
-        m = 0;
-        var y;
+        var velocity = 0;
+        var position = 0;
 
         function start() {
-            y = setInterval(run, 100);
-
-
-            function run() {
-                if (m == 1000) {
-                    clearInterval(y);
-                    m = 0;
-                } else {
-                    m += 10;
-                    var x = document.getElementById("car1");
-                    x.style.marginLeft = m + 'px';
-                }
-            }
+            velocity += 1;
         }
 
         function stop() {
-            clearInterval(y);
+            velocity = 0;
         }
+
+        function run() {
+            position += velocity;
+            if (position > 1100)
+                position = 0;
+            var x = document.getElementById("car1");
+            x.style.marginLeft = position + 'px';
+            requestAnimationFrame(run);
+        }
+
+        requestAnimationFrame(run);
     </script>
 </body>
 
